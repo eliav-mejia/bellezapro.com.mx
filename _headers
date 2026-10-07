@@ -1,0 +1,13 @@
+# Security and rights headers. Applied by Cloudflare Pages (and Netlify). GitHub Pages IGNORES this file:
+# while the site is on GitHub Pages, set the same headers with a Cloudflare Transform Rule (see README §Seguridad).
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:
+
+/images/*
+  X-Robots-Tag: noai, noimageai
+  tdm-reservation: 1
+  tdm-policy: https://bellezapro.com.mx/terminos.html

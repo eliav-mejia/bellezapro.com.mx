@@ -1,0 +1,141 @@
+/* ==========================================================================
+   Belleza Pro MX — layout.css  (v1.0.0)
+   Layer 2 of 3: structure — header, sections, grids, sticky split, parallax plates, footer.
+   ========================================================================== */
+
+.container { width: min(100% - 2 * var(--gutter), 76rem); margin-inline: auto; }
+.container--narrow { width: min(100% - 2 * var(--gutter), 52rem); margin-inline: auto; }
+.section { padding-block: var(--section); }
+.section--ink { background: var(--ink); color: var(--ivory); }
+.section--ink .eyebrow, .section--ink .lead { color: rgba(246, 243, 238, .7); }
+.section--white { background: var(--white); }
+.section-head { margin-bottom: clamp(2.5rem, 2rem + 2vw, 4.5rem); max-width: 46rem; }
+.section-head h2 { margin-top: 1rem; }
+.section-head .lead { margin-top: 1.25rem; }
+
+/* 1. Header ---------------------------------------------------------------- */
+.site-header {
+  position: fixed; inset: 0 0 auto; z-index: 50;
+  transition: background .4s var(--ease), box-shadow .4s var(--ease), color .4s var(--ease);
+}
+.site-header.is-scrolled, .site-header--solid { background: rgba(246, 243, 238, .94); backdrop-filter: blur(10px); box-shadow: 0 1px 0 var(--line); }
+.nav { display: flex; align-items: center; justify-content: space-between; height: 5rem; }
+.logo { text-decoration: none; display: flex; flex-direction: column; line-height: 1; }
+.logo__name { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: .02em; }
+.logo__name b { font-weight: 400; color: var(--champagne); }
+.logo__tag { font-size: .55rem; letter-spacing: .38em; text-transform: uppercase; color: var(--stone); margin-top: .3rem; }
+.nav-links { display: flex; gap: 2.25rem; list-style: none; margin: 0; padding: 0; }
+.nav-links a { font-size: .78rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; padding-block: .4rem; border-bottom: 1px solid transparent; transition: border-color .3s; }
+.nav-links a:hover, .nav-links a[aria-current="page"] { border-color: var(--champagne); }
+.nav-toggle { display: none; background: none; border: 0; padding: .5rem; cursor: pointer; }
+.nav-toggle span { display: block; width: 24px; height: 1.5px; background: var(--ink); margin: 6px 0; transition: transform .3s; }
+
+@media (max-width: 900px) {
+  .nav-toggle { display: block; z-index: 2; }
+  .nav-links {
+    position: fixed; inset: 0; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
+    background: var(--ivory); opacity: 0; visibility: hidden; transition: opacity .3s, visibility .3s;
+  }
+  .nav-links a { font-family: var(--font-display); font-size: 2rem; letter-spacing: 0; text-transform: none; font-weight: 400; }
+  .nav-open .nav-links { opacity: 1; visibility: visible; }
+  .nav-open .nav-toggle span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  .nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+}
+
+/* 2. Hero ------------------------------------------------------------------ */
+.hero { min-height: 100svh; display: grid; align-items: end; padding-top: 7rem; padding-bottom: clamp(3rem, 2rem + 4vw, 6rem); position: relative; overflow: hidden; }
+.hero__grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(2rem, 1rem + 4vw, 5rem); align-items: end; }
+.hero h1 { margin-top: 1.5rem; }
+.hero .lead { margin-top: 1.75rem; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2.5rem; }
+.hero__plates { position: relative; aspect-ratio: 4 / 5; }
+.hero__plates .plate:first-child { position: absolute; inset: 0 18% 14% 0; }
+.hero__plates .plate:last-child { position: absolute; inset: 38% 0 0 34%; box-shadow: 0 30px 60px -30px rgba(21,21,21,.45); }
+.hero--page { min-height: 70svh; }
+.hero--page .hero__grid { grid-template-columns: 1fr; }
+
+@media (max-width: 900px) {
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero__plates { max-width: 26rem; width: 100%; margin-inline: auto; }
+}
+
+/* 3. Plates: image slots. Until photographs exist they render as tinted art with the slot name.
+      To place a photograph: <figure class="plate"><img src="/images/..." alt="..."></figure> */
+.plate { position: relative; margin: 0; overflow: hidden; border-radius: var(--radius); background: var(--champagne-light); }
+.plate img { width: 100%; height: 100%; object-fit: cover; }
+.plate[data-slot]::after {
+  content: attr(data-slot);
+  position: absolute; left: 1rem; bottom: .9rem; right: 1rem;
+  font-size: .62rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgba(21,21,21,.55);
+}
+.plate--gold  { background: radial-gradient(120% 90% at 20% 10%, #f3e7d2 0%, #d9c29b 55%, #b8996a 100%); }
+.plate--ink   { background: radial-gradient(120% 90% at 80% 0%, #3a3632 0%, #1d1b19 60%, #151515 100%); }
+.plate--ink[data-slot]::after { color: rgba(246,243,238,.55); }
+.plate--rose  { background: radial-gradient(120% 90% at 30% 20%, #fdf3f4 0%, #f4dfe2 50%, #e2b9bf 100%); }
+.plate--mint  { background: radial-gradient(120% 90% at 70% 20%, #f6faf9 0%, #e7efed 50%, #b9d0cb 100%); }
+.plate--stone { background: radial-gradient(120% 90% at 50% 0%, #fbf9f5 0%, #ebe4d8 60%, #d8cdbb 100%); }
+/* Abstract droplet / arc ornaments so empty plates still read as designed */
+.plate--orb::before {
+  content: ''; position: absolute; width: 58%; aspect-ratio: 1; left: 21%; top: 16%; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.85), rgba(255,255,255,0) 60%), rgba(255,255,255,.18);
+  box-shadow: inset 0 -12px 30px rgba(21,21,21,.08);
+}
+.plate--arc::before {
+  content: ''; position: absolute; inset: 18% 14% auto; aspect-ratio: 1; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.55); box-shadow: 0 0 0 18px rgba(255,255,255,.08), 0 0 0 36px rgba(255,255,255,.05);
+}
+
+/* Parallax (js/parallax.js moves [data-speed] elements; off with prefers-reduced-motion) */
+[data-speed] { will-change: transform; }
+
+/* 4. Grids ----------------------------------------------------------------- */
+.grid { display: grid; gap: clamp(1.25rem, 1rem + 1vw, 2rem); }
+.grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 900px) { .grid--3, .grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; } }
+
+/* 5. Sticky split: text stays while plates scroll ------------------------- */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 1rem + 5vw, 6rem); align-items: start; }
+.split__sticky { position: sticky; top: 7rem; }
+.split__plates { display: grid; gap: 1.5rem; }
+.split__plates .plate { aspect-ratio: 4 / 5; }
+@media (max-width: 900px) { .split { grid-template-columns: 1fr; } .split__sticky { position: static; } .split__plates .plate { aspect-ratio: 16 / 10; } }
+
+/* 6. Stats band ------------------------------------------------------------ */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(246,243,238,.15); }
+.stat { padding: 2.5rem 1.5rem 0 0; }
+.stat__value { font-family: var(--font-display); font-size: clamp(2.5rem, 2rem + 2vw, 4rem); color: var(--champagne); line-height: 1; }
+.stat__label { font-size: .85rem; margin-top: .75rem; color: rgba(246,243,238,.7); }
+@media (max-width: 700px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+/* 7. Footer ---------------------------------------------------------------- */
+.site-footer { background: var(--ink); color: rgba(246,243,238,.72); padding-top: 5rem; font-size: .9rem; }
+.site-footer .logo__name { color: var(--ivory); }
+.site-footer .lead { color: rgba(246,243,238,.72); font-size: .95rem; margin-top: 1.25rem; max-width: 22rem; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 4rem; }
+.footer-grid h2 { font-family: var(--font-body); font-size: .7rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--champagne); margin-bottom: 1.25rem; }
+.footer-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.footer-grid a { text-decoration: none; }
+.footer-grid a:hover { color: var(--ivory); }
+.footer-bottom { border-top: 1px solid rgba(246,243,238,.12); padding-block: 1.5rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-size: .78rem; }
+@media (max-width: 800px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+
+/* 8. Reveal on scroll (js/main.js adds .is-in) ---------------------------- */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+.reveal.is-in { opacity: 1; transform: none; }
+.no-js .reveal { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  [data-speed] { transform: none !important; }
+}
+
+/* 9. Lists used as grids, media in splits --------------------------------- */
+ol.grid, ul.grid, ul[role="list"] { list-style: none; margin: 0; padding: 0; }
+.split__media { aspect-ratio: 4 / 5; }
+@media (max-width: 900px) { .split__media { aspect-ratio: 16 / 10; } }
+.split .grid { margin-top: 2.5rem; }

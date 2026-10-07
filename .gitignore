@@ -1,0 +1,16 @@
+# Documentación interna: nunca en el repositorio ni en el sitio (la guía pide sacar docs/ del repositorio público).
+_interno/
+
+# Configuración local del editor / agente
+.claude/
+
+# Originales de cámara: solo se publican las copias web exportadas (images/**/README.md)
+images/**/*-original.*
+*.CR2
+*.NEF
+*.ARW
+
+# Secretos (Etapa 2+)
+.env
+.env.*
+!.env.example
