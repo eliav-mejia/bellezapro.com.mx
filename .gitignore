@@ -1,5 +1,7 @@
 # Documentación interna: nunca en el repositorio ni en el sitio (la guía pide sacar docs/ del repositorio público).
 _interno/
+# Contratos, pagarés y e.firma (explícito, por si _interno/ deja de ignorarse completo)
+_interno/Legal e-firma/
 
 # Configuración local del editor / agente
 .claude/
