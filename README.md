@@ -16,7 +16,7 @@ velocidad y SEO, y no necesita carrito ni cuentas (esas viven en cada marca).
 py -m http.server 8127        # desde esta carpeta → http://localhost:8127
 ```
 
-## Correcciones aplicadas respecto a synode.space (pendientes de la Variante B en la guía)
+## Correcciones aplicadas respecto a casasiego.com (pendientes de la Variante B en la guía)
 
 | Problema en la guía | Aquí |
 |---|---|
@@ -61,7 +61,7 @@ bellezapro.com.mx/
 │   ├── parallax.js               [data-speed]; desactivado con prefers-reduced-motion y en móvil
 │   └── forms.js                  formularios data-mailto → correo prellenado; preselección de vacante
 │
-├── marcas/                       una carpeta por marca (modelo multimarca de synode: brands/<marca>/)
+├── marcas/                       una carpeta por marca (modelo multimarca de casasiego: brands/<marca>/)
 │   ├── individuel-geneve/index.html
 │   └── wishpro/index.html
 ├── especialistas/index.html      programa de formación + postulación
